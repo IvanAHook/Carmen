@@ -11,7 +11,7 @@ public class LookAtPointer : MonoBehaviour {
 	{
 		cc = GetComponent<CharacterController>();
 	}
-	
+
 	void Update()
 	{
 		Vector3 lookAtPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -73,5 +73,23 @@ public class LookAtPointer : MonoBehaviour {
 
 		return Mathf.Rad2Deg * Mathf.Atan2(y, x) - 90;
 	}
+
+	void OnControllerColliderHit(ControllerColliderHit hit)
+	{
+		Debug.Log(hit.gameObject.name);
+		hit.gameObject.GetComponent<Rigidbody>().AddForce(transform.up*100);
+	}
+
+//	void OnCollisionEnter(Collision other)
+//	{
+//		Debug.Log(other.gameObject.name);
+//		other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward*100);
+//	}
+
+//	void OnTriggerEnter(Collider other)
+//	{
+//		Debug.Log(other.gameObject.name + " trigger");
+//		other.GetComponent<Rigidbody>().AddForce(transform.up);
+//	}
 
 }
