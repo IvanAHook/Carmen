@@ -3,15 +3,6 @@ using System.Collections;
 
 public class LookAtPointer : MonoBehaviour {
 
-	private const float BASESPEED = 2f;
-
-	private CharacterController cc;
-
-	void Awake()
-	{
-		cc = GetComponent<CharacterController>();
-	}
-
 	void Update()
 	{
 		Vector3 lookAtPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -19,40 +10,8 @@ public class LookAtPointer : MonoBehaviour {
 
 		float angle = GetAngle(transform.position, mousePoint);
 		transform.eulerAngles = new Vector3(0, 0, angle);
-
-		PhysicsMove();
-		//Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 1);
 	}
 
-	private void PhysicsMove()
-	{
-		Vector2 direction = Vector2.zero;
-		//Left
-		if (Input.GetKey(KeyCode.A))
-		{
-			direction += Vector2.left;
-		}
-		//Right
-		if(Input.GetKey(KeyCode.D)){
-			direction += Vector2.right;
-		}
-		//Up
-		if (Input.GetKey(KeyCode.W)){
-			direction += Vector2.up;
-		}
-		//Down
-		if(Input.GetKey(KeyCode.S)){
-			direction += Vector2.down;
-		}
-
-		if (direction != Vector2.zero)
-		{
-			cc.Move(direction.normalized * BASESPEED * Time.deltaTime);
-			//cc.SimpleMove(direction.normalized * BASESPEED * Time.deltaTime);
-			//rb2d.AddForce(direction.normalized * BASESPEED * Time.deltaTime);
-		}
-			
-	}
 
 	//private void Move(float horizontal, float vertical, float speedModifier) // direction vector normalized for consitent movement speed ples
 	//{
@@ -77,19 +36,7 @@ public class LookAtPointer : MonoBehaviour {
 	void OnControllerColliderHit(ControllerColliderHit hit)
 	{
 		Debug.Log(hit.gameObject.name);
-		hit.gameObject.GetComponent<Rigidbody>().AddForce(transform.up*100);
+		//hit.gameObject.GetComponent<Rigidbody>().AddForce(transform.up*0.2f);
 	}
-
-//	void OnCollisionEnter(Collision other)
-//	{
-//		Debug.Log(other.gameObject.name);
-//		other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward*100);
-//	}
-
-//	void OnTriggerEnter(Collider other)
-//	{
-//		Debug.Log(other.gameObject.name + " trigger");
-//		other.GetComponent<Rigidbody>().AddForce(transform.up);
-//	}
 
 }
