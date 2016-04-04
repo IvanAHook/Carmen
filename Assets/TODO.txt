@@ -1,0 +1,7 @@
+Character Interraction
+	Dialogue
+	Dialogue follow
+
+Inventory
+Journal
+
