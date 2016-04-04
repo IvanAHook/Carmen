@@ -5,3 +5,4 @@ Character Interraction
 Inventory
 Journal
 
+Fix movement
